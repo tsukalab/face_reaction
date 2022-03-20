@@ -12,7 +12,8 @@
   display: flex;
   flex-direction: column;
   width: 768px;
-  height: 500px;
+  height: 460px;
+  padding: 32px 32px;
 }
 
 .main-text {
