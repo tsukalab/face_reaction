@@ -34,16 +34,14 @@ const initializeCamera = async (deviceId = null) => {
 
 const CameraReady = () => {
   const [devices, setDevices] = useState(null);
-  const [currentDevice, setCurrentDevice] = useState(null);
+  const [stream, setStream] = useState(null);
 
   useEffect(async () => {
-    const stream = await initializeCamera();
+    setStream(await initializeCamera());
     setDevices(await getDevices());
-    setCurrentDevice(stream.id);
   }, []);
-  const handleChange = (e) => {
-    setCurrentDevice(e.target.value);
-    initializeCamera(e.target.value);
+  const handleChange = async (e) => {
+    setStream(await initializeCamera(e.target.value));
   };
 
   return (
@@ -51,7 +49,7 @@ const CameraReady = () => {
       <h2 className="main-text">カメラに顔が映るようにしてくだい</h2>
       <FormControl style={selectForm}>
         <InputLabel>ウェブカメラを切り替える</InputLabel>
-        <Select onChange={handleChange} value={currentDevice} displayEmpty>
+        <Select onChange={handleChange} displayEmpty>
           {devices
             ? devices.map((device) => {
                 return (
