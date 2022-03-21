@@ -32,14 +32,14 @@ const initializeCamera = async (deviceId = null) => {
   }
 };
 
-const CameraReady = () => {
+const CameraReady = ({ moveQuestion, stream, setStream }) => {
   const [devices, setDevices] = useState(null);
-  const [stream, setStream] = useState(null);
 
   useEffect(async () => {
     setStream(await initializeCamera());
     setDevices(await getDevices());
   }, []);
+
   const handleChange = async (e) => {
     setStream(await initializeCamera(e.target.value));
   };
@@ -49,7 +49,7 @@ const CameraReady = () => {
       <h2 className="main-text">カメラに顔が映るようにしてくだい</h2>
       <FormControl style={selectForm}>
         <InputLabel>ウェブカメラを切り替える</InputLabel>
-        <Select onChange={handleChange} displayEmpty>
+        <Select onChange={handleChange} displayEmpty defaultValue={''}>
           {devices
             ? devices.map((device) => {
                 return (
@@ -62,7 +62,13 @@ const CameraReady = () => {
         </Select>
       </FormControl>
       <video id="player" style={player}></video>
-      <Button variant="contained" style={cornerButton}>
+      <Button
+        variant="contained"
+        style={cornerButton}
+        onClick={() => {
+          moveQuestion();
+        }}
+      >
         次へ
       </Button>
     </div>

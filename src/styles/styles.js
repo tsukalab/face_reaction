@@ -1,6 +1,4 @@
-import { autocompleteClasses } from '@mui/material';
-
-const marginContent = 16;
+export const marginContent = 16;
 
 export const selectForm = {
   m: 1,
@@ -23,4 +21,10 @@ export const cornerButton = {
   marginTop: marginContent,
   marginLeft: 'auto',
   marginRight: marginContent,
+};
+
+export const questionForm = {
+  margin: '16px 0',
+  width: 200,
+  marginLeft: 160,
 };
