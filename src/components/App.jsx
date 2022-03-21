@@ -1,6 +1,7 @@
 import CameraReady from './CameraReady';
 import Question from './Question';
 import Loading from './Loading';
+import ThankYouScreen from './ThankYouScreen';
 import '../styles/App.css';
 import { useState } from 'react';
 
@@ -15,14 +16,20 @@ function App() {
     setFlag(2);
   };
 
+  const moveResult = () => {
+    setFlag(3);
+  };
+
   return (
     <div className="App">
       {pageFlag === 0 ? (
         <CameraReady moveQuestion={moveQuestion}></CameraReady>
       ) : pageFlag === 1 ? (
-        <Question moveLoading={moveLoading}></Question>
-      ) : (
+        <Question moveLoading={moveLoading} moveResult={moveResult}></Question>
+      ) : pageFlag === 2 ? (
         <Loading></Loading>
+      ) : (
+        <ThankYouScreen></ThankYouScreen>
       )}
     </div>
   );
