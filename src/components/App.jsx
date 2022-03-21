@@ -20,7 +20,7 @@ function App() {
           setStream={setStream}
         ></CameraReady>
       ) : pageFlag === 1 ? (
-        <Question></Question>
+        <Question answer={answer} setAnswer={setAnswer}></Question>
       ) : (
         <></>
       )}
