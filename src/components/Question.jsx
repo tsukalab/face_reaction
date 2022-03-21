@@ -12,7 +12,7 @@ import { speakText } from '../utils/speechSynthesis';
 import { cornerButton, questionForm, marginContent } from '../styles/styles';
 import { stopRecording } from '../utils/webCamera';
 
-const Question = () => {
+const Question = ({ moveLoading }) => {
   const [answer, setAnswer] = useState(null);
   const [helperText, setHelperText] = useState('');
   const [error, setError] = useState(false);
@@ -35,6 +35,7 @@ const Question = () => {
       setHelperText('');
       setError(false);
       stopRecording();
+      moveLoading();
     }
   };
 
