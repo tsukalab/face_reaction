@@ -5,8 +5,6 @@ import { useState } from 'react';
 
 function App() {
   const [pageFlag, setFlag] = useState(0);
-  const [stream, setStream] = useState(null);
-  const [answer, setAnswer] = useState(null);
 
   const moveQuestion = () => {
     setFlag(1);
@@ -14,13 +12,9 @@ function App() {
   return (
     <div className="App">
       {pageFlag === 0 ? (
-        <CameraReady
-          moveQuestion={moveQuestion}
-          stream={stream}
-          setStream={setStream}
-        ></CameraReady>
+        <CameraReady moveQuestion={moveQuestion}></CameraReady>
       ) : pageFlag === 1 ? (
-        <Question answer={answer} setAnswer={setAnswer}></Question>
+        <Question></Question>
       ) : (
         <></>
       )}

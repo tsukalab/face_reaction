@@ -12,7 +12,8 @@ import { speakText } from '../utils/speechSynthesis';
 import { cornerButton, questionForm, marginContent } from '../styles/styles';
 import { stopRecording } from '../utils/webCamera';
 
-const Question = ({ answer, setAnswer }) => {
+const Question = () => {
+  const [answer, setAnswer] = useState(null);
   const [helperText, setHelperText] = useState('');
   const [error, setError] = useState(false);
 

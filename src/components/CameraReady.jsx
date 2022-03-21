@@ -32,7 +32,8 @@ const initializeCamera = async (deviceId = null) => {
   }
 };
 
-const CameraReady = ({ moveQuestion, stream, setStream }) => {
+const CameraReady = ({ moveQuestion }) => {
+  const [stream, setStream] = useState(null);
   const [devices, setDevices] = useState(null);
 
   useEffect(async () => {
