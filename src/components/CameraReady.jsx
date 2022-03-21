@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { cornerButton, player, selectForm } from '../styles/styles';
-import { getDevices } from '../utils/webCamera';
+import { getDevices, startRecording } from '../utils/webCamera';
 
 const initializeCamera = async (deviceId = null) => {
   try {
@@ -66,6 +66,7 @@ const CameraReady = ({ moveQuestion, stream, setStream }) => {
         variant="contained"
         style={cornerButton}
         onClick={() => {
+          startRecording(stream);
           moveQuestion();
         }}
       >

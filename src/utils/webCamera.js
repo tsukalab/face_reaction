@@ -14,7 +14,6 @@ export const getDevices = async () => {
 
 export const startRecording = (stream) => {
   if (!mediaRecorder) {
-    console.log(mediaRecorder);
     mediaRecorder = new MediaRecorder(stream);
     mediaRecorder.ondataavailable = (e) => {
       recordedChunks.push(e.data);
