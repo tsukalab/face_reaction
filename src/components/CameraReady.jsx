@@ -48,7 +48,7 @@ const CameraReady = ({ moveQuestion }) => {
   return (
     <div id="camera-ready" className="main-container">
       <h2 className="main-text">カメラに顔が映るようにしてくだい</h2>
-      <FormControl style={selectForm}>
+      <FormControl style={selectForm} id="select-form">
         <InputLabel>ウェブカメラを切り替える</InputLabel>
         <Select onChange={handleChange} displayEmpty defaultValue={''}>
           {devices
@@ -62,7 +62,7 @@ const CameraReady = ({ moveQuestion }) => {
             : null}
         </Select>
       </FormControl>
-      <video id="player" style={player}></video>
+      <video id="player"></video>
       <Button
         variant="contained"
         style={cornerButton}

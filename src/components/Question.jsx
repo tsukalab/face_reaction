@@ -9,8 +9,8 @@ import {
 import { useEffect, useState } from 'react';
 import '../styles/App.css';
 import { speakText } from '../utils/speechSynthesis';
-import { cornerButton, questionForm, marginContent } from '../styles/styles';
-import { stopRecording } from '../utils/webCamera';
+import { cornerButton, marginContent } from '../styles/styles';
+import { downloadRecordData, stopRecording } from '../utils/webCamera';
 
 const Question = ({ moveLoading }) => {
   const [answer, setAnswer] = useState(null);
@@ -35,6 +35,7 @@ const Question = ({ moveLoading }) => {
       setHelperText('');
       setError(false);
       stopRecording();
+      setTimeout(downloadRecordData, 100);
       moveLoading();
     }
   };
@@ -44,11 +45,8 @@ const Question = ({ moveLoading }) => {
       <h2 className="main-text" style={{ marginTop: 60 }}>
         今日の問題の難易度はどうでしたか？
       </h2>
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: 'flex', flexDirection: 'column' }}
-      >
-        <FormControl style={questionForm} error={error}>
+      <form onSubmit={handleSubmit} className="question-form">
+        <FormControl error={error}>
           <RadioGroup onChange={handleChange} value={answer}>
             <FormControlLabel
               value="easy"
