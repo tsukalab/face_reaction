@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { cornerButton, selectForm } from '../styles/styles';
+import { speakText } from '../utils/speechSynthesis';
 import { getDevices, startRecording } from '../utils/webCamera';
 
 const initializeCamera = async (deviceId = null) => {
@@ -15,9 +16,9 @@ const initializeCamera = async (deviceId = null) => {
     const constraints = {
       audio: false,
       video: {
-        facingMode: 'environment',
-        width: 1280,
-        height: 720,
+        facingMode: 'user',
+        width: { min: 640, ideal: 1280 },
+        height: { min: 360, ideal: 720 },
         deviceId: deviceId,
       },
     };
@@ -69,6 +70,7 @@ const CameraReady = ({ moveQuestion }) => {
         onClick={() => {
           startRecording(stream);
           moveQuestion();
+          speakText('こんにちは');
         }}
       >
         次へ
