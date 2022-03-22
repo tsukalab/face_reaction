@@ -10,9 +10,10 @@ import { useEffect, useState } from 'react';
 import '../styles/App.css';
 import { speakText } from '../utils/speechSynthesis';
 import { cornerButton, marginContent } from '../styles/styles';
-import { downloadRecordData, stopRecording } from '../utils/webCamera';
+import { getRecordData, stopRecording } from '../utils/webCamera';
+import { uploadToDropBox } from '../utils/uploadFile';
 
-const Question = ({ moveLoading }) => {
+const Question = ({ moveLoading, moveResult, moveQuestion }) => {
   const [answer, setAnswer] = useState(null);
   const [helperText, setHelperText] = useState('');
   const [error, setError] = useState(false);
@@ -25,7 +26,7 @@ const Question = ({ moveLoading }) => {
     setAnswer(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!answer) {
@@ -35,8 +36,34 @@ const Question = ({ moveLoading }) => {
       setHelperText('');
       setError(false);
       stopRecording();
-      setTimeout(downloadRecordData, 100);
       moveLoading();
+      //イベント発火待ちタイムアウト（あんまり良くない）
+      setTimeout(async () => {
+        const now = new Date();
+        const date = {
+          year: now.getFullYear(),
+          month: ('00' + (now.getMonth() + 1)).slice(-2),
+          day: ('00' + now.getDate()).slice(-2),
+          hour: ('00' + now.getHours()).slice(-2),
+          minute: ('00' + now.getMinutes()).slice(-2),
+        };
+        const datePath = `${date.year}_${date.month}_${date.day}`;
+        const videoPath = `/kawatani/${datePath}.mp4`;
+        const textPath = `/kawatani/${datePath}.txt`;
+        const videoFile = getRecordData();
+        const answerTextFile = new Blob([answer], { type: 'text/plain' });
+
+        try {
+          await Promise.all([
+            uploadToDropBox(videoFile, videoPath),
+            uploadToDropBox(answerTextFile, textPath),
+          ]);
+          moveResult();
+        } catch (err) {
+          alert('アップロードに失敗しました．');
+          console.error(err);
+        }
+      }, 1);
     }
   };
 

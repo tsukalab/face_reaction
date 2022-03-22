@@ -42,15 +42,8 @@ export const resumeRecording = () => {
   console.log('MediaRecorder resume');
 };
 
-export const downloadRecordData = () => {
-  const blob = new Blob(recordedChunks, { type: 'video/webm' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  document.body.appendChild(a);
-  a.style = 'display: none';
-  a.href = url;
-  a.download = 'video.webm';
-  a.click();
-  window.URL.revokeObjectURL(url);
-  document.body.removeChild(a);
+export const getRecordData = () => {
+  const blob = new Blob(recordedChunks, { type: 'video/mp4' });
+  console.log(blob);
+  return blob;
 };
