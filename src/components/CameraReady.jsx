@@ -7,7 +7,7 @@ import {
   Button,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { cornerButton, player, selectForm } from '../styles/styles';
+import { cornerButton, selectForm } from '../styles/styles';
 import { getDevices, startRecording } from '../utils/webCamera';
 
 const initializeCamera = async (deviceId = null) => {
