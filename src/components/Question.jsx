@@ -13,7 +13,7 @@ import { cornerButton, marginContent } from '../styles/styles';
 import { getRecordData, stopRecording } from '../utils/webCamera';
 import { uploadToDropBox } from '../utils/uploadFile';
 
-const Question = ({ moveLoading, moveResult, moveQuestion }) => {
+const Question = ({ moveLoading, moveResult }) => {
   const [answer, setAnswer] = useState(null);
   const [helperText, setHelperText] = useState('');
   const [error, setError] = useState(false);
@@ -63,7 +63,7 @@ const Question = ({ moveLoading, moveResult, moveQuestion }) => {
           alert('アップロードに失敗しました．');
           console.error(err);
         }
-      }, 1);
+      }, 100);
     }
   };
 

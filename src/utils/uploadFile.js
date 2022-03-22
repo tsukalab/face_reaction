@@ -8,7 +8,7 @@ export const uploadToDropBox = async (file, path) => {
       data: file,
       headers: {
         Authorization:
-          'Bearer sl.BERFkUj4xhpVzZLOGJblBytf6GS9fzab7y6E3RD2CsBibArz7Ixl3SUXSvyLHLNjEVEl-UE1FS_sx4dQbZEZfP6bPICwnKyhQVP9mbNoyVP4eeojB8wJdOUzas0gP3nf4kIILUo',
+          'Bearer sl.BESnlvWo86Ws8Xe3aU00KwFs9MtL0M0gEwEvJr2oXy58WBOwzkhmZpAFfxDeyIPK1_VPLINbPuqEzQnYKt-3a2zMbiasj_cTI6P1hxV41J6dEVrXqqlv6M1AhV-POoUG6mStdnQ',
         'Content-Type': 'application/octet-stream',
         'Dropbox-API-Arg': JSON.stringify({
           path: path, //アップロード時のファイルパス
