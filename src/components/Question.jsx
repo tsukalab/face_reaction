@@ -46,8 +46,9 @@ const Question = ({ moveLoading, moveResult }) => {
           day: ('00' + now.getDate()).slice(-2),
           hour: ('00' + now.getHours()).slice(-2),
           minute: ('00' + now.getMinutes()).slice(-2),
+          seconds: ('00' + now.getSeconds()).slice(-2),
         };
-        const datePath = `${date.year}_${date.month}_${date.day}`;
+        const datePath = `${date.year}_${date.month}_${date.day}_${date.hour}:${date.minute}:${date.seconds}`;
         const videoPath = `/kawatani/${datePath}.mp4`;
         const textPath = `/kawatani/${datePath}.txt`;
         const videoFile = getRecordData();
