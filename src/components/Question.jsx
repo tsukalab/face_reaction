@@ -12,11 +12,14 @@ import { speakText } from '../utils/speechSynthesis';
 import { cornerButton, marginContent } from '../styles/styles';
 import { getRecordData, stopRecording } from '../utils/webCamera';
 import { uploadToDropBox } from '../utils/uploadFile';
+import { useNavigate } from 'react-router-dom';
 
-const Question = ({ moveLoading, moveResult }) => {
+const Question = () => {
   const [answer, setAnswer] = useState(null);
   const [helperText, setHelperText] = useState('');
   const [error, setError] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     speakText('今日の問題の難易度はどうでしたか？');
@@ -36,7 +39,7 @@ const Question = ({ moveLoading, moveResult }) => {
       setHelperText('');
       setError(false);
       stopRecording();
-      moveLoading();
+      navigate('/loading');
       //イベント発火待ちタイムアウト（あんまり良くない）
       setTimeout(async () => {
         const now = new Date();
@@ -59,7 +62,7 @@ const Question = ({ moveLoading, moveResult }) => {
             uploadToDropBox(videoFile, videoPath),
             uploadToDropBox(answerTextFile, textPath),
           ]);
-          moveResult();
+          navigate('/complete');
         } catch (err) {
           alert('アップロードに失敗しました．');
           console.error(err);

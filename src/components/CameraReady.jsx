@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from 'react';
 import { cornerButton, selectForm } from '../styles/styles';
 import { getDevices, startRecording } from '../utils/webCamera';
+import { useNavigate } from 'react-router-dom';
 
 const initializeCamera = async (deviceId = null) => {
   try {
@@ -32,9 +33,11 @@ const initializeCamera = async (deviceId = null) => {
   }
 };
 
-const CameraReady = ({ moveQuestion }) => {
+const CameraReady = () => {
   const [stream, setStream] = useState(null);
   const [devices, setDevices] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(async () => {
     setStream(await initializeCamera());
@@ -68,7 +71,7 @@ const CameraReady = ({ moveQuestion }) => {
         style={cornerButton}
         onClick={() => {
           startRecording(stream);
-          moveQuestion();
+          navigate('question');
         }}
       >
         次へ
