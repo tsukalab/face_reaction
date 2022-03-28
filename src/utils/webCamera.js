@@ -44,6 +44,5 @@ export const resumeRecording = () => {
 
 export const getRecordData = () => {
   const blob = new Blob(recordedChunks, { type: 'video/mp4' });
-  console.log(blob);
   return blob;
 };

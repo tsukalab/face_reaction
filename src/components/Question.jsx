@@ -11,7 +11,7 @@ import '../styles/App.css';
 import { speakText } from '../utils/speechSynthesis';
 import { cornerButton, marginContent } from '../styles/styles';
 import { getRecordData, stopRecording } from '../utils/webCamera';
-import { uploadToDropBox } from '../utils/uploadFile';
+import { getDatePath, uploadToDropBox } from '../utils/uploadFile';
 import { useNavigate } from 'react-router-dom';
 
 const Question = () => {
@@ -42,16 +42,7 @@ const Question = () => {
       navigate('/loading');
       //イベント発火待ちタイムアウト（あんまり良くない）
       setTimeout(async () => {
-        const now = new Date();
-        const date = {
-          year: now.getFullYear(),
-          month: ('00' + (now.getMonth() + 1)).slice(-2),
-          day: ('00' + now.getDate()).slice(-2),
-          hour: ('00' + now.getHours()).slice(-2),
-          minute: ('00' + now.getMinutes()).slice(-2),
-          seconds: ('00' + now.getSeconds()).slice(-2),
-        };
-        const datePath = `${date.year}_${date.month}_${date.day}_${date.hour}:${date.minute}:${date.seconds}`;
+        const datePath = getDatePath();
         const videoPath = `/kawatani/${datePath}.mp4`;
         const textPath = `/kawatani/${datePath}.txt`;
         const videoFile = getRecordData();

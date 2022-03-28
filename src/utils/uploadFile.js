@@ -49,3 +49,18 @@ export const uploadToDropBox = async (file, path) => {
     throw new Error('upload file error:' + err);
   }
 };
+
+export const getDatePath = () => {
+  const now = new Date();
+  const date = {
+    year: now.getFullYear(),
+    month: ('00' + (now.getMonth() + 1)).slice(-2),
+    day: ('00' + now.getDate()).slice(-2),
+    hour: ('00' + now.getHours()).slice(-2),
+    minute: ('00' + now.getMinutes()).slice(-2),
+    seconds: ('00' + now.getSeconds()).slice(-2),
+  };
+  const datePath = `${date.year}_${date.month}_${date.day}_${date.hour}:${date.minute}:${date.seconds}`;
+
+  return datePath;
+};
