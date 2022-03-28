@@ -42,7 +42,17 @@ export const resumeRecording = () => {
   console.log('MediaRecorder resume');
 };
 
+export const getRecordingState = () => {
+  if (mediaRecorder) {
+    const state = mediaRecorder.state;
+    return state;
+  }
+
+  return null;
+};
+
 export const getRecordData = () => {
   const blob = new Blob(recordedChunks, { type: 'video/mp4' });
+
   return blob;
 };

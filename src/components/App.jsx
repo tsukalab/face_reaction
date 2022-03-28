@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route index element={<CameraReady></CameraReady>}></Route>
+          <Route index path="/" element={<CameraReady></CameraReady>}></Route>
           <Route path="question" element={<Question></Question>}></Route>
           <Route path="loading" element={<Loading></Loading>}></Route>
           <Route

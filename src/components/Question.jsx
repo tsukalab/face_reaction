@@ -10,7 +10,11 @@ import { useEffect, useState } from 'react';
 import '../styles/App.css';
 import { speakText } from '../utils/speechSynthesis';
 import { cornerButton, marginContent } from '../styles/styles';
-import { getRecordData, stopRecording } from '../utils/webCamera';
+import {
+  getRecordData,
+  getRecordingState,
+  stopRecording,
+} from '../utils/webCamera';
 import { getDatePath, uploadToDropBox } from '../utils/uploadFile';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,27 +42,44 @@ const Question = () => {
     } else {
       setHelperText('');
       setError(false);
-      stopRecording();
-      navigate('/loading');
-      //イベント発火待ちタイムアウト（あんまり良くない）
-      setTimeout(async () => {
-        const datePath = getDatePath();
-        const videoPath = `/kawatani/${datePath}.mp4`;
-        const textPath = `/kawatani/${datePath}.txt`;
-        const videoFile = getRecordData();
-        const answerTextFile = new Blob([answer], { type: 'text/plain' });
 
-        try {
-          await Promise.all([
-            uploadToDropBox(videoFile, videoPath),
-            uploadToDropBox(answerTextFile, textPath),
-          ]);
-          navigate('/complete');
-        } catch (err) {
-          alert('アップロードに失敗しました．');
-          console.error(err);
+      const recordingState = getRecordingState();
+      const uploadTask = () => {
+        navigate('/loading');
+        //イベント発火待ちタイムアウト（あんまり良くない）
+        setTimeout(async () => {
+          const datePath = getDatePath();
+          const videoPath = `/kawatani/${datePath}.mp4`;
+          const textPath = `/kawatani/${datePath}.txt`;
+          const videoFile = getRecordData();
+          const answerTextFile = new Blob([answer], {
+            type: 'text/plain',
+          });
+
+          try {
+            await Promise.all([
+              uploadToDropBox(videoFile, videoPath),
+              uploadToDropBox(answerTextFile, textPath),
+            ]);
+            navigate('/complete');
+          } catch (err) {
+            alert('アップロードに失敗しました');
+            console.error(err);
+          }
+        }, 100);
+      };
+
+      if (recordingState === 'recording') {
+        stopRecording();
+        uploadTask();
+      } else {
+        const result = window.confirm(
+          '録画に失敗しました．トップページに戻ります．'
+        );
+        if (result) {
+          navigate('/');
         }
-      }, 100);
+      }
     }
   };
 
