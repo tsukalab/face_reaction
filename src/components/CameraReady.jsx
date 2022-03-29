@@ -8,30 +8,12 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { cornerButton, selectForm } from '../styles/styles';
-import { getDevices, startRecording } from '../utils/webCamera';
+import {
+  getDevices,
+  initializeCamera,
+  startRecording,
+} from '../utils/webCamera';
 import { useNavigate } from 'react-router-dom';
-
-const initializeCamera = async (deviceId = null) => {
-  try {
-    const constraints = {
-      audio: false,
-      video: {
-        facingMode: 'environment',
-        width: 1280,
-        height: 720,
-        deviceId: deviceId,
-      },
-    };
-
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
-    const video = document.getElementById('player');
-    video.srcObject = stream;
-    video.play();
-    return stream;
-  } catch (err) {
-    console.error(`camera error occured: ${err}`);
-  }
-};
 
 const CameraReady = () => {
   const [stream, setStream] = useState(null);

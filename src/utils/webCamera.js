@@ -12,6 +12,28 @@ export const getDevices = async () => {
   }
 };
 
+export const initializeCamera = async (deviceId = null) => {
+  try {
+    const constraints = {
+      audio: false,
+      video: {
+        facingMode: 'environment',
+        width: 1280,
+        height: 720,
+        deviceId: deviceId,
+      },
+    };
+
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    const video = document.getElementById('player');
+    video.srcObject = stream;
+    video.play();
+    return stream;
+  } catch (err) {
+    console.error(`camera error occured: ${err}`);
+  }
+};
+
 export const startRecording = (stream) => {
   if (!mediaRecorder) {
     mediaRecorder = new MediaRecorder(stream);
