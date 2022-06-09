@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" id="_イヤー_2" viewBox="0 0 75.9 75.9">
+  <defs>
+    <style>.cls-1{fill:gray;}.cls-2{stroke-linecap:round;}.cls-2,.cls-3{fill:none;stroke:gray;stroke-miterlimit:8;stroke-width:6.06px;}</style>
+  </defs>
+  <g id="_イヤー_1-2">
+    <line class="cls-2" x1="27.95" y1="51.19" x2="47.95" y2="51.19"/>
+    <path class="cls-3" d="M72.87,37.95c0,19.29-15.63,34.92-34.92,34.92S3.03,57.24,3.03,37.95,18.66,3.03,37.95,3.03s34.92,15.63,34.92,34.92h0Z"/>
+    <g>
+      <circle class="cls-1" cx="21.95" cy="32.19" r="5"/>
+      <circle class="cls-1" cx="53.95" cy="32.19" r="5"/>
+    </g>
+  </g>
+</svg>

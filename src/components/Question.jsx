@@ -18,6 +18,11 @@ import {
 import { getDatePath, uploadToDropBox } from '../utils/uploadFile';
 import { useNavigate } from 'react-router-dom';
 
+// import logos
+import SmileLogo from '../images/04_smile.svg';
+import NormalLogo from '../images/04_normal.svg';
+import SadLogo from '../images/04_sad.svg';
+
 const Question = () => {
   const [answer, setAnswer] = useState(null);
   const [helperText, setHelperText] = useState('');
@@ -94,19 +99,38 @@ const Question = () => {
             <FormControlLabel
               value="easy"
               control={<Radio />}
-              label={<span className="radio-text">簡単</span>}
+              label={
+                <span className="radio-text">
+                  簡単
+                  <img src={SmileLogo} alt="smileIcon" className="radio-logo" />
+                </span>
+              }
               style={{ marginBottom: marginContent }}
             />
             <FormControlLabel
               value="normal"
               control={<Radio />}
-              label={<span className="radio-text">普通</span>}
+              label={
+                <span className="radio-text">
+                  普通
+                  <img
+                    src={NormalLogo}
+                    alt="NormalIcon"
+                    className="radio-logo"
+                  />
+                </span>
+              }
               style={{ marginBottom: marginContent }}
             />
             <FormControlLabel
               value="difficult"
               control={<Radio />}
-              label={<span className="radio-text">難しい</span>}
+              label={
+                <span className="radio-text">
+                  難しい
+                  <img src={SadLogo} alt="SadIcon" className="radio-logo" />
+                </span>
+              }
               style={{ marginBottom: marginContent }}
             />
           </RadioGroup>
